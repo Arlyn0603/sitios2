@@ -39,6 +39,8 @@
                         <a href="/historial">Historial</a> <!-- Cambiado de "Perfil" a "Historial" -->
                         <a href="/billetera">Billetera</a>
                         <a href="/atencion/tickets/vista">Mis Tickets</a>
+                        <a href="/carrito">Carrito</a>
+
                         <a href="/logout">Cerrar sesión</a>
                     </div>
                 </div>
@@ -47,6 +49,25 @@
                 <button id="loginButton" onclick="openModal()">Iniciar sesión</button>
             <% } %>
         </header>
+
+        <script>
+            // Función para alternar el menú de perfil
+            function toggleProfileMenu() {
+                const dropdownMenu = document.getElementById('dropdownMenu');
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            }
+        
+            // Cerrar el menú si se hace clic fuera de él
+            window.onclick = function(event) {
+                if (!event.target.matches('.profile-btn')) {
+                    const dropdownMenu = document.getElementById('dropdownMenu');
+                    if (dropdownMenu.style.display === 'block') {
+                        dropdownMenu.style.display = 'none';
+                    }
+                }
+            }
+        
+        </script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -36,31 +36,50 @@
                 <a href="#">Festivales</a>
             </nav>
             <% if (user) { %>
-                <!-- Botón de búsqueda (lupa) -->
-                <button class="search-btn" onclick="toggleSearchSection()">
-                    <img src="/img/lupa.png" alt="Buscar" width="20">
-                </button>
-                <!-- Botón de perfil -->
-                <div class="profile-dropdown">
-                    <button id="profileButton" class="profile-btn" onclick="toggleProfileMenu()">
-                        <img src="/img/user.png" alt="Perfil">
-                        <span id="profileEmail"><%= user.email %></span>
+                <% if (user.tipo === 'Admin') { %>
+                    <!-- Header para Admin -->
+                    <button class="search-btn" onclick="toggleSearchSection()">
+                        <img src="/img/lupa.png" alt="Buscar" width="20">
                     </button>
-                    <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="/historial">Historial</a>
-                        <a href="/billetera">Billetera</a>
-                        <a href="/atencion/tickets/vista">Mis Tickets</a>
-                        <a href="/logout">Cerrar sesión</a>
+                    <div class="profile-dropdown">
+                        <button id="profileButton" class="profile-btn" onclick="toggleProfileMenu()">
+                            <img src="/img/user.png" alt="Perfil">
+                            <span id="profileEmail"><%= user.email %></span>
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="/administrar/eventos">Administrar Eventos</a>
+                            <a href="/administrar/usuarios">Administrar Usuarios</a>
+                            <a href="/reportes">Reportes</a>
+                            <a href="/logout">Cerrar sesión</a>
+                        </div>
                     </div>
-                </div>
+                <% } else { %>
+                    <!-- Header para Cliente -->
+                    <button class="search-btn" onclick="toggleSearchSection()">
+                        <img src="/img/lupa.png" alt="Buscar" width="20">
+                    </button>
+                    <div class="profile-dropdown">
+                        <button id="profileButton" class="profile-btn" onclick="toggleProfileMenu()">
+                            <img src="/img/user.png" alt="Perfil">
+                            <span id="profileEmail"><%= user.email %></span>
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="/historial">Historial</a>
+                            <a href="/billetera">Billetera</a>
+                            <a href="/atencion/tickets/vista">Mis Tickets</a>
+                            <a href="/carrito">Carrito</a>
+                            <a href="/logout">Cerrar sesión</a>
+                        </div>
+                    </div>
+                <% } %>
             <% } else { %>
-                <!-- Botón de búsqueda (lupa) para usuarios no autenticados -->
+                <!-- Header para usuarios no autenticados -->
                 <button class="search-btn" onclick="toggleSearchSection()">
                     <img src="/img/lupa.png" alt="Buscar" width="20">
                 </button>
-                <!-- Botón de iniciar sesión -->
                 <button id="loginButton" onclick="openModal()">Iniciar sesión</button>
             <% } %>
+            
         </header>
 
         <section class="hero">

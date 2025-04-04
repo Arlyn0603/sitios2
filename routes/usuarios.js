@@ -141,8 +141,8 @@ router.post("/verificarCodigo", async (req, res) => {
         // 3. Buscar al usuario usando el email de la sesión
         const pool = await poolPromise;
         const result = await pool.request()
-            .input("email", sql.VarChar, req.session.email)
-            .query("SELECT id, CorreoElectronico, Nombres, Apellidos FROM Usuarios WHERE CorreoElectronico = @email");
+            .input("email", sql.VarChar, req.session.email)  // Cambiar 'email' por 'req.session.email'
+            .query("SELECT id, CorreoElectronico, Nombres, Apellidos, tipo FROM Usuarios WHERE CorreoElectronico = @email");
 
         if (result.recordset.length === 0) {
             // Esto NO debería ocurrir si el login fue exitoso
@@ -158,8 +158,10 @@ router.post("/verificarCodigo", async (req, res) => {
             id: user.id,
             email: user.CorreoElectronico,
             firstName: user.Nombres,
-            lastName: user.Apellidos
+            lastName: user.Apellidos,
+            tipo: user.tipo  // Asegúrate de incluir esto
         };
+        
 
         // 5. Limpiar datos temporales
         delete req.session.verificationCode;

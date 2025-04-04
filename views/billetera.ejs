@@ -35,6 +35,8 @@
                         <a href="/historial">Historial</a> <!-- Cambiado de "Perfil" a "Historial" -->
                         <a href="/billetera">Billetera</a>
                         <a href="/atencion/tickets/vista">Mis Tickets</a>
+                        <a href="/carrito">Carrito</a>
+
                         <a href="/logout">Cerrar sesión</a>
                     </div>
                 </div>
@@ -78,6 +80,7 @@
                     <div class="payment-method-item">
                         <p><%= tarjeta.TipoTarjeta %> ···· <%= tarjeta.UltimosCuatroDigitos %></p>
                         <p>Titular: <%= tarjeta.NombreTitular %></p>
+                        <p>Saldo: ₡<%= tarjeta.Saldo.toFixed(2) %></p> <!-- Muestra el saldo de la tarjeta -->
                         <button class="delete-btn" onclick="eliminarTarjeta('<%= tarjeta.NumeroTarjeta %>')">Eliminar</button>
                     </div>
                 <% }); %>
@@ -95,7 +98,7 @@
                 <input type="text" id="numeroTarjeta" name="numeroTarjeta" maxlength="16" required>
                     
                 <label for="nombreTitular">Nombre del Titular:</label>
-                <input type="text" id="nombreTitular" name="nombreTitular" required>
+                <input type="text" id="nombreTitular" name="nombreTitular" value="<%= user.firstName %> <%= user.lastName %>" readonly> <!-- Bloqueado y precargado -->
                     
                 <label for="fechaExpiracion">Fecha de Expiración (MM/YY):</label>
                 <input type="text" id="fechaExpiracion" name="fechaExpiracion" placeholder="MM/YY" required>
